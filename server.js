@@ -9,21 +9,19 @@ var PORT = process.env.PORT || 8080;
 
 const db = require("./models");
 const HTMLroutes = require("./routes/html");
-const APIroutes = require("./require/APIroutes");
-
-//Express hookup with everything else 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const APIroutes = require("./routes/api");
 
 //using css, js, etc.
 app.use(express.static("public"));
-
+//Express hookup with everything else 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 //Dearest Morgan, ...
 app.use(logger("dev"));
 
 //calling the routes
 app.use(require("./routes/html"));
-app.use(require("./require/api"));
+app.use(require("./routes/api"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
     useNewUrlParser: true,
@@ -35,5 +33,4 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
 //PORT function
 app.listen(PORT, function () {
     console.log(`App listening on http://localhost:${PORT}`);
-    
 });
