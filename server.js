@@ -8,8 +8,8 @@ const app = express ();
 var PORT = process.env.PORT || 8080;
 
 const db = require("./models");
-const HTMLroutes = require("./routes/html");
-const APIroutes = require("./routes/api");
+const HTMLroutes = require("./routes/html-routes");
+const APIroutes = require("./routes/api-routes");
 
 //using css, js, etc.
 app.use(express.static("public"));
@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(logger("dev"));
 
 //calling the routes
-app.use(require("./routes/html"));
-app.use(require("./routes/api"));
+app.use(require("./routes/html-routes"));
+app.use(require("./routes/api-routes"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
     useNewUrlParser: true,
